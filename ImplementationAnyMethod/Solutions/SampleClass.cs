@@ -19,13 +19,13 @@ public sealed class SampleClass
         if (employees is null || employees.Count() == 0)
         {
             return;
-        }
+        }j
     }
 
     /// <summary>
     /// Demonstrates the preferred empty-sequence check because Any() can stop as
     /// soon as the first item is found.
-    /// </summary>
+    /// </summary>9
     public void GoodSampleMethod(IEnumerable<EmployeeType>? employees)
     {
         if (employees is null || !employees.Any())
