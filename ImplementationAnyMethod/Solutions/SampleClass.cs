@@ -1,38 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace ImplementationAnyMethod.Solutions;
 
-namespace ImplementationAnyMethod.Solutions
+public enum EmployeeType
 {
-    public enum EmployeeType
+    Unknown = 0,
+    FullTime = 1,
+    Contractor = 2,
+    Intern = 3
+}
+
+public sealed class SampleClass
+{
+    /// <summary>
+    /// Demonstrates the slower empty-sequence check because Count() can enumerate
+    /// the entire collection before returning a result.
+    /// </summary>
+    public void BadSampleMethod(IEnumerable<EmployeeType>? employees)
     {
-        Unknown = 0,
-        FullTime = 1,
-        Contractor = 2,
-        Intern = 3
+        if (employees is null || employees.Count() == 0)
+        {
+            return;
+        }
     }
 
-    public class SampleClass
+    /// <summary>
+    /// Demonstrates the preferred empty-sequence check because Any() can stop as
+    /// soon as the first item is found.
+    /// </summary>
+    public void GoodSampleMethod(IEnumerable<EmployeeType>? employees)
     {
-        //Using Count() enumerates the entire collection to compute the count
-        public void BadSampleMethod(IEnumerable<EmployeeType> employees)
+        if (employees is null || !employees.Any())
         {
-            if (employees is null || employees.Count() == 0)
-            {
-                return;
-
-                // other implementations
-            }
-        }
-
-        //Using Any() method is faster and more readable
-        public void GoodSampleMethod(IEnumerable<EmployeeType> employees)
-        {
-            if (employees is null || !employees.Any())
-            {
-                return;
-            }
+            return;
         }
     }
 }
